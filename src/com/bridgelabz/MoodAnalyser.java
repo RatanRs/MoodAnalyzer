@@ -15,16 +15,26 @@ public class MoodAnalyser {
 	String message;
 
 	public MoodAnalyser(String message) {
-		this.message = message;
+		if (message.equalsIgnoreCase("null")) {
+			this.message = null;
+		} 
+		else {
+			this.message = message;
+		}
 	}
 
-	public String moodAnalyzer() {
+	public void moodAnalysisException() {
 
-		boolean status = message.toLowerCase().contains("sad");
-		if (status == true) {
-			return "Sad";
-		} else {
-			return "Happy";
+		try {
+
+			boolean status = message.contains("sad");
+			if (status == true) {
+				System.out.println("Sad");
+			} else {
+				System.out.println("Happy");
+			}
+		} catch (Exception exception) {
+			System.out.println("Happy");
 		}
 	}
 
@@ -32,8 +42,7 @@ public class MoodAnalyser {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter message : ");
 		String message = input.nextLine();
-       MoodAnalyser moodAnalyser = new MoodAnalyser(message);
-		String result = moodAnalyser.moodAnalyzer();
-		System.out.println(result);
+        MoodAnalyser moodAnalyser = new MoodAnalyser(message);
+		moodAnalyser.moodAnalysisException();
 	}
 }
